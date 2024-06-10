@@ -1,7 +1,5 @@
 from typing import List
 
-import item_database
-
 
 class ShoppingCart:
     def __init__(self, max_size: int) -> None:
