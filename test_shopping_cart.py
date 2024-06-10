@@ -41,3 +41,21 @@ def test_can_get_total_price(cart):
 
     item_database.get = Mock(side_effect=mock_get_item)
     assert cart.get_total_price(item_database) == 3.0
+
+
+def test_can_get_total_price_using_database(cart):
+    cart.add("apple")
+    cart.add("orange")
+    item_database = ItemDatabase()
+    expected_total_price = 1.0 + 2.0
+    actual_total_price = cart.get_total_price(item_database)
+    assert actual_total_price == expected_total_price
+
+
+def test_item_not_found_raises_error(cart):
+    cart.add("apple")
+    cart.add("candy")
+    item_database = ItemDatabase()
+    with pytest.raises(ValueError) as exception_detail:
+        actual_total_price = cart.get_total_price(item_database)
+    assert str(exception_detail.value) == "Item 'candy' not found in database"

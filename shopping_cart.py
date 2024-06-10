@@ -1,5 +1,7 @@
 from typing import List
 
+import item_database
+
 
 class ShoppingCart:
     def __init__(self, max_size: int) -> None:
@@ -17,7 +19,7 @@ class ShoppingCart:
     def get_items(self) -> List[str]:
         return self.items
 
-    def get_total_price(self, price_map):
+    def get_total_price(self, price_map) -> float:
         total_price = 0
         for item in self.items:
             total_price += price_map.get(item)
